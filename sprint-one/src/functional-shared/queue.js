@@ -5,7 +5,8 @@ var Queue = function() {
 
   // declare a storage variable
   var storage = {};
-  _.extend(storage, Queue.queueMethods);
+  storage.queue = {};
+  _.extend(storage, queueMethods);
   return storage;
   // // enqueue method adds
   // Queue.enqueue =
@@ -15,22 +16,25 @@ var Queue = function() {
   // Queue.size =
 };
 
-Queue.queueMethods = {};
+var queueMethods = {};
 var keyNum = 1;
 // add the value with numerical key to the storage object
-// Queue.queueMethods.enqueue = function(value){
-//   // this.storage
-// };
+queueMethods.enqueue = function(value){
+  // this.storage
+  this.queue[keyNum] = value;
+  keyNum++;
+  return this.queue;
+};
 // console.log(queueMethods);
 // console.log(Queue.queueMethods);
-// Queue.queueMethods.dequeue = function(){
+queueMethods.dequeue = function(){
 
-// };
-
-Queue.queueMethods.size = function(){
-  // return this.length;
-  console.log(this);
-  console.log(this.storage);
 };
 
-console.log(Queue().storage);
+queueMethods.size = function(){
+  // access storage.queue to determine size
+  return Object.keys(this.queue).length;
+};
+
+// when size is invoked
+// storage.size()
