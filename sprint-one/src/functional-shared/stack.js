@@ -24,11 +24,16 @@ stackMethods.push = function(value){
 
 stackMethods.pop = function(){
   // grab the keys using Object.keys()
+  var keys = Object.keys(this.stack);
   // store the largest key in a variable
+  var largest = this.stack[keys[keys.length-1]];
   // delete the largest key from the storage stack
+  delete this.stack[keys[keys.length-1]];
   // return the value of the largest key
+  return largest;
 };
 
 stackMethods.size = function(){
   // return the length of the storage stack
+  return Object.keys(this.stack).length;
 };
