@@ -28,7 +28,14 @@ queueMethods.enqueue = function(value){
 // console.log(queueMethods);
 // console.log(Queue.queueMethods);
 queueMethods.dequeue = function(){
-
+  // take Object.keys array
+  var keys = Object.keys(this.queue);
+  // save lowest value in variable to return after deletion
+  var lowest = this.queue[keys[0]];
+  // using lowest object key, remove least recently added property from queue (use delete)
+  delete this.queue[keys[0]];
+  // return deleted item
+  return lowest;
 };
 
 queueMethods.size = function(){
