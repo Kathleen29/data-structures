@@ -42,9 +42,9 @@ Graph.prototype.removeNode = function(node) {
     if(key === node) {
       found = key;
     }
-    if (this.nodes.hasEdge(key, node)) {
-      this.nodes.removeEdge(key, node);
-    };
+    if (this.hasEdge(key, node)) {
+      this.removeEdge(key, node);
+    }
     // // for each key, iterate through edges array
     // for(var i = 0; i < this[key].length; i++) {
     //   // check if each edge equals target node to be removed
@@ -66,7 +66,6 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
   // check the newGraph object for fromNode key
   // if the edges array contains toNode, return true
   // else return false
-  console.log(this.nodes[fromNode]);
   return (this.nodes[fromNode].includes(toNode));
 };
 
@@ -92,7 +91,9 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 Graph.prototype.forEachNode = function(cb) {
   var args = Object.keys(this.nodes);
   var applyToAll = function () {
-    cb.apply(this.nodes, args);
+    for (var i = 0; i < args.length; i++) {
+      cb.call(this.nodes, args[i]);
+    }
   };
   applyToAll();
 };
