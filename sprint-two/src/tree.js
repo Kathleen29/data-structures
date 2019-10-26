@@ -5,7 +5,7 @@ var Tree = function(value) {
   // your code here
   newTree.children = [];  // fix me
   // extend newTree with treeMethods
-  _.extend(newTree, treeMethods)
+  _.extend(newTree, treeMethods);
 
   return newTree;
 };
@@ -35,7 +35,7 @@ treeMethods.contains = function(target) {
     // else if there are children of current input
     // call traverse function on children
       for (var i = 0; i < tree.children.length; i++){
-        traverse(tree.children[i])
+        traverse(tree.children[i]);
       }
     }
     return found;
