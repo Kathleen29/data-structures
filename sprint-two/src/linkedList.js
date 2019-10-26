@@ -7,19 +7,19 @@ var LinkedList = function() {
     // call an instance of Node
     var instance = Node(value);
     // somehow update previous node to tell it what next should point to
-      // check if list object is empty... if yes
+    // check if list object is empty... if yes
     if (this.head === null) {
       // set head and tail to that node
       this.head = instance;
       this.tail = instance;
-    } // else
-    else {
+    } else {
       // set next of current tail node to equal this instance of node and set this instance to tail
       this.tail.next = instance;
       this.tail = instance;
     // add new instance of node to list object
     }
   };
+  // time complexity is constant
 
   list.removeHead = function() {
     // store original node that head points to in variable
@@ -29,6 +29,7 @@ var LinkedList = function() {
     // return original node variable
     return currentHead;
   };
+  // time complexity is constant
 
   list.contains = function(target) {
     // create a recursive function to find target in chain of nodes
@@ -51,6 +52,7 @@ var LinkedList = function() {
   };
   return list;
 };
+//  time complexity is linear
 
 var Node = function(value) {
   var node = {};
@@ -62,5 +64,5 @@ var Node = function(value) {
 };
 
 /*
- * Complexity: What is the time complexity of the above functions?
+ * Complexity: What is the time complexity of the above functions? O(n) (linear);
  */
