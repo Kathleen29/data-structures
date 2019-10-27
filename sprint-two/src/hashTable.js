@@ -19,7 +19,7 @@ HashTable.prototype.insert = function(k, v) {
     for(var i = 0; i < bucket.length; i++) {
       // splice the tuple off of the index array
       if(bucket[i][0] === k) {
-    // overwite old bucket with new bucket
+      // overwite old bucket with new bucket
         bucket.splice(i, 1);
       }
     }
@@ -55,7 +55,7 @@ HashTable.prototype.remove = function(k) {
   for(var i = 0; i < bucket.length; i++) {
     // splice the tuple off of the index array
     if(bucket[i][0] === k) {
-  // overwite old bucket with new bucket
+    // overwite old bucket with new bucket
       bucket.splice(i, 1);
     }
   }
