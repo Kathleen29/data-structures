@@ -8,14 +8,26 @@ var HashTable = function() {
 // index in fn below says which index we add key/value pair to w/in hash table
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  // check if index is null
-  // use .get here to grab value at index
-  // storage isn't a key of
-  // var buckets = this._storage.get(index) || [];
-  // push k/v pair into bucket array
   var tuple = [k, v];
-  // push k & v into tuple
-  this._storage.set(index, tuple);
+  // if value at index is undefined, create new bucket
+  var bucket = this._storage.get(index);
+  if(bucket === undefined) {
+    this._storage.set(index, [tuple]);
+  } else {
+    // this.remove(k);
+    // if index 0 matches input k...
+    for(var i = 0; i < bucket.length; i++) {
+      // splice the tuple off of the index array
+      if(bucket[i][0] === k) {
+    // overwite old bucket with new bucket
+        bucket.splice(i, 1);
+      }
+    }
+    this._storage.set(index, bucket);
+    // overwrite existing bucket with a new bucket that cointains result of calling get.push([tuple])
+    this._storage.set(index, bucket.push(tuple));
+  }
+  // console.log(bucket);
 };
 
 // storage = [ [['a', '1'],['c', '3']],
@@ -24,18 +36,30 @@ HashTable.prototype.insert = function(k, v) {
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   // loop through storage index bucket and compare index 0 to input k
-  // this._storage.each(function () {
-  //   if ()
-  // });
-  // if index 0 matches input k...
-    // return index 1
+  var bucket = this._storage.get(index); // imagine this as an array [[tuple], [tuple]]
+  for (var i = 0; i<bucket.length; i++) {
+    // if index 0 matches input k...
+    if (bucket[i][0] === k) {
+      // console.log(bucket);
+      // return index 1
+      return bucket[i][1];
+    }
+  }
 };
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   // loop through storage index bucket and compare index 0 to input k
+  var bucket = this._storage.get(index);
   // if index 0 matches input k...
+  for(var i = 0; i < bucket.length; i++) {
     // splice the tuple off of the index array
+    if(bucket[i][0] === k) {
+  // overwite old bucket with new bucket
+      bucket.splice(i, 1);
+    }
+  }
+  this._storage.set(index, bucket);
 };
 
 
