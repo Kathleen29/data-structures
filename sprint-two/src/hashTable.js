@@ -1,5 +1,3 @@
-
-
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
@@ -16,18 +14,21 @@ HashTable.prototype.insert = function(k, v) {
   } else {
     // this.remove(k);
     // if index 0 matches input k...
+    var found = false;
+
     for(var i = 0; i < bucket.length; i++) {
       // splice the tuple off of the index array
       if(bucket[i][0] === k) {
       // overwite old bucket with new bucket
-        bucket.splice(i, 1);
+        bucket[i][1] = v;
+        found = true;
       }
     }
-    this._storage.set(index, bucket);
     // overwrite existing bucket with a new bucket that cointains result of calling get.push([tuple])
-    this._storage.set(index, bucket.push(tuple));
+    if(!found) {
+      bucket.push(tuple);
+    }
   }
-  // console.log(bucket);
 };
 
 // storage = [ [['a', '1'],['c', '3']],
@@ -40,7 +41,6 @@ HashTable.prototype.retrieve = function(k) {
   for (var i = 0; i<bucket.length; i++) {
     // if index 0 matches input k...
     if (bucket[i][0] === k) {
-      // console.log(bucket);
       // return index 1
       return bucket[i][1];
     }
@@ -67,5 +67,3 @@ HashTable.prototype.remove = function(k) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
-
-
